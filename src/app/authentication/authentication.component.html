@@ -1,0 +1,86 @@
+<div class="card mt-3 p-3">
+    <div class="row">
+        <div class="col-md-9">
+            <h3 class="text-center">Sign Up</h3>
+
+            <form #form="ngForm" (ngSubmit)="submit(form)">
+
+                <div class="row mb-3">
+                    <div class="col-md-2">
+                        <label for="">First Name</label>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" placeholder="First Name" name="firstname" id="firstname" [(ngModel)]="user.first_name" #firstname="ngModel" required minlength="5" maxlength="60" [ngClass]="{'is-invalid': (firstname.touched || firstname.dirty) && !firstname.valid }">
+                        <span class="invalid-feedback">
+                            <span *ngIf="firstname.errors?.required">
+                              Please enter your first name.
+                            </span>
+                        <span *ngIf="firstname.errors?.minlength">
+                             Min of 5 characters required
+                            </span>
+                        <span *ngIf="firstname.errors?.maxlength">
+                                Max of 60 characters required
+                               </span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-2">
+                        <label for="">Last Name</label>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" placeholder="Last Name" name="lastname" id="lastname" [(ngModel)]="user.last_name" #lastname="ngModel">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-2">
+                        <label for="">Username</label>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" placeholder="Username" name="username" id="username" [(ngModel)]="user.username" #username="ngModel" required [ngClass]="{'is-invalid': (username.touched || username.dirty) && !username.valid }">
+                        <span class="invalid-feedback">
+                            <span *ngIf="username.errors?.required">
+                              Please enter your username.
+                            </span>
+                        <span *ngIf="userError?.error.username">
+                                {{userError.error.username}}
+                              </span>
+
+                        </span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-2">
+                        <label for="">Email</label>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="email" class="form-control" placeholder="Email" name="email" id="email" [(ngModel)]="user.email" #email="ngModel">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-2">
+                        <label for="">Password</label>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="password" class="form-control" placeholder="Password" name="password" id="password" [(ngModel)]="user.password" #password="ngModel">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-2 offset-md-2">
+                        <button [disabled]="!form.valid" class="btn btn-sm btn-primary" type="submit">Submit</button>
+                    </div>
+                    <div class="col-md-2 offset-md-2">
+                        <button class="btn btn-sm btn-danger" (click)="cancel()">Cancel</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="mt-3">
+    {{form.value | json}}
+</div>
